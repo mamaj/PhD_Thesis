@@ -1,0 +1,62 @@
+% !TeX TS-program = pdflatex
+% !BIB TS-program = biber
+% !TeX root = main.tex
+
+\documentclass{ut-thesis}
+
+% packages
+\input{preambles/packages}
+
+% command definitions
+\input{preambles/definitions}
+
+% author data
+\author{MohammadReza Ebrahimi}
+
+\title{Machine Learning Perspectives in Compression, Distributed Computing, and Brain Imaging}
+
+\degree{Doctor of Philosophy}
+\department[]{Department of Electrical and Computer Engineering}
+\gradyear{2024}
+
+% reference database
+\addbibresource{refs/refs-ch1.bib}
+\addbibresource{refs/refs-ch2.bib}
+\addbibresource{refs/refs-ch3.bib}
+
+\begin{document}
+
+  \frontmatter
+    
+    \maketitle
+    
+    \begin{abstract}
+      \input{abstract}
+    \end{abstract}
+    
+    \begin{dedication}
+      \input{acks/dedication}
+    \end{dedication}
+    
+    \begin{acknowledgements}
+      \input{acks/acknowledgements}
+    \end{acknowledgements}
+    
+    \tableofcontents
+    \listoftables
+    \listoffigures
+
+  \mainmatter
+    \input{ch0-intro}
+    \input{ch1-fmri}
+    \input{ch2-sgc}
+    \input{ch3-mecb}
+    \input{ch4-conclusion}
+  
+  % \appendix
+  %   \input{appendix}
+  
+  \backmatter
+  \printbibliography[heading=bibintoc]
+  
+\end{document}

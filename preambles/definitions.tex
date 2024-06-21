@@ -1,0 +1,190 @@
+
+\newcommand{\todo}[1]{\textcolor{red}{[#1]}}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem*{example}{Example}
+\newtheorem{prop}{Proposition}[chapter]
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand*{\Scale}[2][4]{\scalebox{#1}{$#2$}}%
+\newcommand{\spaced}[1]{{ \setlength{\jot}{8pt} 
+% \savebox\strutbox{$\vphantom{\dfrac11}$} 
+#1}}
+\newcommand{\limdp}{\lim\limits_{\dpp\to 0}}
+\newcommand{\altfrac}[2]{\ifmmode\def\tmp{$}\else\def\tmp{}\fi\mbox{%
+    {\raisebox{.24\ht\strutbox}{\tmp#1\tmp}}%
+    \kern-2.2pt\scalebox{1.6}[1.5]{/}\kern-1.8pt%
+    {\tmp#2\tmp}%
+    }}
+% Tex Mathmode, Page 35
+\def\mathllap{\mathpalette\mathllapinternal}
+\def\mathllapinternal#1#2{%
+\llap{$\mathsurround=0pt#1{#2}$}% $
+}
+\def\clap#1{\hbox to 0pt{\hss#1\hss}}
+\def\mathclap{\mathpalette\mathclapinternal}
+\def\mathclapinternal#1#2{%
+\clap{$\mathsurround=0pt#1{#2}$}%
+}
+\def\mathrlap{\mathpalette\mathrlapinternal}
+\def\mathrlapinternal#1#2{%
+\rlap{$\mathsurround=0pt#1{#2}$}% $
+}
+
+\setlength{\parindent}{0pt}
+
+\DeclareMathOperator*{\argmax}{argmax} % thin space, limits underneath in displays
+\DeclareMathOperator*{\argmin}{argmin} % thin space, limits underneath in displays
+
+\newcommand{\Pxt}{p_{XT}}
+\newcommand{\PxtHat}{\widehat{p}_{XT}}
+\newcommand{\dif}[1]{\text{d}{#1}}
+\newcommand{\dP}{\dif{P}}
+% \newcommand{\dpp}{\dif{p}}
+\newcommand{\dpp}{\varepsilon}
+\newcommand{\innerp}[2]{\langle #1, #2 \rangle}
+\newcommand{\MECB}{\mathcal{I}_\text{MEC-B}}
+\newcommand{\MEC}{\mathcal{I}_\text{MEC}}
+\newcommand{\COMP}{\mathcal{I}_\text{EBIM}}
+% \newcommand{\obj}{\mathcal{I}}
+\newcommand{\obj}{\COMP}
+
+\newcommand{\xsum}{\textstyle\sum\limits}
+\newcommand{\msum}[2]{
+\sum\limits_{
+    \substack{\scriptscriptstyle{#1}\\\scriptscriptstyle{#2}}
+    }
+}
+\newcommand{\dsum}{\sum\limits_{\substack{ x, t \\ t \neq g(x) }}}
+% \newcommand{\ddsum}{\sum\limits_{x} \sum\limits_{\scriptscriptstyle{t \neq g(x)}}}
+\newcommand{\ddsum}{\sum\limits_{x \,} \hspace{2pt} \sum\limits_{\scriptscriptstyle \mathclap{t \neq g(x)}} \; }
+\newcommand{\doublesum}[2]{\sum\limits_{#1\,} \hspace{2pt} \sum\limits_{\scriptscriptstyle \mathclap{#2}} \; }
+\newcommand{\DeltaHsymbol}{\Delta_H}
+\newcommand{\DeltaH}[2]{\DeltaHsymbol\left(#1 \, , \ #2\right)}
+
+\newcommand{\largest}{\texttt{largest}}
+\newcommand{\smallest}{\texttt{smallest}}
+\newcommand{\hybrid}{\texttt{hybrid}}
+
+\newcommand{\Pmerged}[1]{p^{(#1)}}
+\newcommand{\Pl}[1]{P_{l}^{(#1)}}
+\newcommand{\Ps}[1]{P_{s}^{(#1)}}
+\newcommand{\Imerged}[1]{I^{(#1)}}
+\newcommand{\Il}[1]{I_{l}^{(#1)}}
+\newcommand{\Is}[1]{I_{s}^{(#1)}}
+\newcommand{\rvect}[1]{{\setlength\arraycolsep{3pt} \renewcommand\arraystretch{1} \begin{bmatrix} #1 \end{bmatrix}}}
+\newcommand{\ent}[1]{H\left( #1 \right)}
+\newcommand{\cmt}[1]{\triangleright \ \Scale[0.8]{#1}}
+\newcommand{\abar}{\overline{\alpha}}
+
+\newcommand{\maxi}{\max\limits_{i\in \{1,\cdots,n-1\}}\ }
+
+\newcommand{\eqtcb}[2]{
+\begin{center}
+\begin{tcolorbox}[
+    title=#1, 
+    title filled, width=\linewidth, boxrule=.8pt, colback=white]
+    #2
+\end{tcolorbox}
+\end{center}
+}
+
+\newenvironment{spmatrix}[1]
+{\def\mysubscript{#1}\mathop\bgroup\begin{bmatrix}}
+{\end{bmatrix}\egroup^{\textstyle\mathstrut\mysubscript}_{1}}
+
+
+
+
+
+
+% def file
+
+
+
+
+% New Commands
+\newcommand{\bea}{\begin{eqnarray}} % Shortcut for equation arrays
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\e}[1]{\times 10^{#1}}  % Powers of 10 notation
+
+% Defining a theorem box for Criteria
+\newtheorem{critere}{Criterion}
+\newcommand{\crit}[2]{
+\begin{center}  
+\fbox{ \begin{minipage}[c]{0.9 \textwidth}
+\begin{critere}
+\textbf{\textup{ #1}} --- #2
+\end{critere}
+\end{minipage}  } \end{center}
+}
+
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{corollary}{Corollary}[theorem]
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{remark}[theorem]{Remark}
+%----------------------------------------------------------------------------------------
+%	YOUR DEFINITIONS AND COMMANDS
+%----------------------------------------------------------------------------------------
+
+\def\reals{\mathbb{R}} % Real number symbol
+\def\W{\bm{W}}
+\def\w#1{\W^{(#1)}}
+\def\y{\bm{Y}}
+\def\Y#1{\y^{(#1)}}
+\def\X{\bm{X}}
+\def\K{\bm{K}}
+\def\sv#1{\rho_{(#1)}^2}
+\def\rv#1{\sigma_{#1}^2}
+\def\q{Q}
+\def\t{T}
+\def\m{M}
+\def\p{P}
+\def\params{\bm{\theta}}
+\def\spcov#1{\bm{\Psi}^{(#1)}}
+\def\A{\bm{A}} 
+\def\rvs{\bm{\sigma}^2}
+
+\def\ytrain#1{$\y^{\text{train }}_#1$}
+\def\ytest#1{$\y^{\text{test }}_#1$}
+\def\yseg{$\y^{\text{query }}$}
+\def\xseg{$\X^{\text{query }}$}
+\def\wtrain{$\W^{\text{train }}$}
+\def\wtest{$\W^{\text{test }}$}
+\def\xtrain#1{$\X^{\text{train }}_#1$}
+\def\xtest#1{$\X^{\text{test }}_#1$}
+
+\def\gp{\mathcal{GP}}
+\def\gaus{\mathcal{N}}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\beginsupplement}{%
+        \setcounter{table}{0}
+        \renewcommand{\thetable}{S\arabic{table}}%
+        \setcounter{figure}{0}
+        \renewcommand{\thefigure}{S\arabic{figure}}%
+        \setcounter{section}{0}
+        \renewcommand{\thesection}{S\arabic{section}}
+}
+
+\def\ex{\mathbb{E}}
+\def\pr{\mathbb{P}}
+
+
+% \def\enc{P_\text{enc}}
+% \def\dec{P_\text{dec}}
+\def\enc{p}
+\def\dec{q}
+
+
+% \newcommand{\argmin}{\operatornamewithlimits{argmin}}
+% \newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\chidist}{chi}
+
+\def\bD{\mathbf{D}}

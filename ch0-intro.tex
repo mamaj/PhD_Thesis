@@ -1,0 +1,84 @@
+\chapter{Introduction} \label{ch:intro}
+
+Machine learning (ML) has profoundly transformed the way we analyze data, make predictions, and solve complex problems across numerous fields. At its core, machine learning involves the development of algorithms that allow computers to learn from and make decisions based on data.
+The impact of machine learning is profound and far-reaching, affecting industries and sciences by providing innovative solutions to complex, data-driven problems. It has transformed sectors such as healthcare, finance, and telecommunications, where predictive analytics and automated decision-making processes significantly enhance efficiency and effectiveness. In the scientific domain, machine learning techniques have become indispensable tools in fields ranging from genomic sequencing to astrophysics, helping to unravel complex patterns and predict phenomena with unprecedented accuracy.
+
+This thesis explores three critical dimensions in machine learning: \textit{modeling}, \textit{training}, and \textit{theory}. Each dimension is represented by a specific project in brain imaging, distributed computing, and compression, addressing unique challenges and contributing to the overarching goal of advancing machine learning methodologies and applications.
+
+Modeling refers to the process of providing simplifying assumptions on the data generation process, which leads to algorithms capable of identifying patterns in data and making predictions or decisions based on those patterns. Training involves optimizing these models using data, often requiring substantial computational resources and careful coordinating and aggregating, especially in distributed systems. Lastly, theoretical insights, particularly from information theory, are essential for understanding and improving machine learning systems, by quantifying the limits of data compression, storage, and communication.
+
+\section{Core Themes of the Thesis}
+This thesis investigates three essential aspects of machine learning: \textit{modeling}, \textit{training}, and \textit{theory}. Each theme is explored through dedicated projects that address specific challenges within these areas. 
+
+\subsection{Modeling}
+Classically, statistical modeling involves assuming a simplified generation process for the observed data with the goal of capturing specific properties of data. In modern deep learning, models are much more flexible, so modeling largely entails making architectural choices that inject specific inductive biases into the learning algorithm.
+
+Functional Magnetic Resonance Imaging (fMRI) offers a window into the dynamic activity of the human brain, through a noisy proxy that poses significant challenges for interpretation. Machine learning, with its array of modeling techniques, provides powerful tools to extract meaningful insights from this complex neural data. Chapter~\ref{ch:fmri} presents a novel probabilistic modeling approach, known as Shared Gaussian Process Factor Analysis (S-GPFA), to model the shared temporal dynamics and spatial organization of brain activity across individuals. The proposed model simultaneously performs functional aggregation, dimensionality reduction, and dynamical modeling of fMRI data in multi-subject datasets. 
+
+S-GPFA addresses a critical challenge in fMRI research: accounting for individual variability while uncovering shared neural dynamical patterns. A key innovation of S-GPFA lies in its emphasis on the temporal dimension of data during modeling. Unlike traditional approaches that often necessitate making unjustifiable modeling assumptions, S-GPFA leverages the inherent temporal dimension within fMRI data to achieve a more interpretable representation of brain activity. This emphasis on temporal dynamics allows S-GPFA to better model individual variability while uncovering shared neural patterns across subjects.
+
+
+
+\subsection{Training}
+The ever-increasing size of datasets and the growing complexity of machine learning models necessitate the use of distributed training, where multiple computing nodes work together to train a model. However, the presence of stragglers, or slow-performing workers, can significantly impede the efficiency of distributed training, creating bottlenecks that delay the overall process. 
+
+Chapter~\ref{ch:sgc} focuses on distributed training and introduces novel coding schemes that mitigate the impact of stragglers, thereby enhancing training efficiency and scalability.
+Traditional approaches to straggler mitigation often rely on replication or simple redundancy mechanisms, which can lead to increased computational overhead and resource utilization. Chapter~\ref{ch:sgc} presents two innovative coding schemes, Selective Reattempt Sequential Gradient Coding (SR-SGC) and Multiplexed Sequential Gradient Coding (M-SGC), that leverage coding across both the spatial (workers) and temporal (rounds) dimensions to achieve straggler resilience with significantly reduced computational load. These schemes exploit the temporal diversity of straggler behavior, where periods of high straggler activity are often followed by periods of low straggler activity, to optimize resource allocation and minimize delays.
+By incorporating coding across time, SR-SGC and M-SGC effectively adapt to the dynamic nature of straggler patterns, ensuring efficient training even in the presence of varying worker speeds. This adaptability is crucial for real-world distributed training scenarios, where network fluctuations and resource contention can lead to unpredictable straggler behavior.
+
+\subsection{Theory}
+
+Information theory provides a fundamental framework for understanding the limits of data compression, communication, and representation. Its principles have profound implications for machine learning, guiding the design of efficient algorithms and providing insights into the inherent trade-offs between compression and fidelity. Chapter~\ref{ch:mecb} explores the intersection of information theory and machine learning, introducing a novel framework called Minimum Entropy Coupling with Bottleneck (MEC-B) that addresses the challenge of lossy data compression under logarithmic loss.
+
+Traditional lossy compression methods often focus on minimizing distortion measures such as mean squared error. MEC-B, on the other hand, utilizes log-loss as its distortion metric, providing a more suitable measure of fidelity for tasks involving probabilistic predictions or soft reconstructions. Additionally, MEC-B extends the popular Minimum Entropy Coupling (MEC) framework by incorporating rate limits, allowing for a more controlled and flexible coupling. While MEC focuses on finding the joint distribution with minimal entropy given marginal distributions, MEC-B introduces a constraint on the entropy of the compressed representation, effectively regulating the amount of entropy of the resulting coupling.
+
+The chapter also proposes a relevant formulation for compression known as Entropy-Bounded Information Maximization (EBIM), where the objective is to maximize the mutual information between the input and the compressed code, subject to an entropy constraint on the code. This formulation aligns with the goals of lossy compression, seeking to preserve as much relevant information as possible while adhering to a specified rate limit.
+
+To provide efficient approximate solutions for EBIM, the chapter proposes a novel search algorithm for identifying deterministic mappings with guaranteed performance bounds. Additionally, it characterizes the optimal solution in the vicinity of deterministic mappings, providing insights into the structure of the solution space and paving the way for further algorithmic development.
+
+The MEC-B framework offers a unique perspective on compression and information retrieval, enabling the design of algorithms that achieve high fidelity while adhering to specific entropy constraints. This capability is particularly relevant for machine learning applications where efficient data representation and information extraction are crucial.
+
+
+\section{Summary of Contributions}
+
+This thesis presents three distinct projects, each contributing to the advancement of machine learning methodologies and applications across different domains. 
+
+The first project, detailed in Chapter~\ref{ch:fmri}, introduces Shared Gaussian Process Factor Analysis (S-GPFA) as a novel probabilistic model for analyzing fMRI data. S-GPFA addresses the challenge of modeling individual variability while uncovering shared temporal dynamics and spatial organization of brain activity in multi-subject datasets. The results presented in Chapter~\ref{ch:fmri} have appeared in \cite{ebrahimi2023time}. The key contributions of this project include:
+
+\begin{itemize}
+    \item \textbf{Modeling Shared Temporal Dynamics:} S-GPFA incorporates Gaussian Process priors to model the temporal correlations within fMRI data, leading to more accurate and interpretable representations of brain activity compared to traditional static methods.
+    \item \textbf{Functional Aggregation and Dimensionality Reduction:} The model effectively combines functional aggregation, dimensionality reduction, and dynamical modeling, providing a comprehensive framework for analyzing multi-subject fMRI datasets. 
+    \item \textbf{Scientific Utility:}  The application of S-GPFA to the SPINS dataset demonstrates its ability to identify group-specific dynamical characteristics and brain regions with meaningful functional variability, offering valuable insights into socioemotional cognitive capacity and potential avenues for studying psychiatric disorders. 
+\end{itemize}
+
+The second project, presented in Chapter~\ref{ch:sgc}, focuses on mitigating the impact of stragglers in distributed training of machine learning models. The chapter introduces two novel coding schemes, Selective Reattempt Sequential Gradient Coding (SR-SGC) and Multiplexed Sequential Gradient Coding (M-SGC), that leverage coding across both the spatial and temporal dimensions to achieve straggler resilience with reduced computational load. The results presented in Chapter~\ref{ch:sgc} have been published in \cite{krishnan2023sequential}, where the author holds joint first authorship. Contributions primarily focused on the real-world evaluation and implementation of the schemes.
+
+The main contributions of this project are:
+
+\begin{itemize}
+    \item \textbf{Exploiting Temporal Diversity:} SR-SGC and M-SGC effectively exploit the temporal diversity of straggler behavior, adapting to varying worker speeds and minimizing delays caused by stragglers.
+    \item \textbf{Reduced Computational Load:} M-SGC significantly reduces the computational load per worker compared to traditional Gradient Coding schemes, leading to improved training efficiency.
+    \item \textbf{Real-world Performance and Insights:} Experiments on a large-scale AWS Lambda cluster demonstrate the effectiveness of the proposed schemes in reducing runtime and improving training performance in real-world conditions with naturally occurring stragglers.
+\end{itemize}
+
+The third project, explored in Chapter~\ref{ch:mecb}, investigates the theoretical foundations of data coupling and compression through the lens of information theory. The chapter introduces Minimum Entropy Coupling with Bottleneck (MEC-B) as a framework for lossy data compression under logarithmic loss. As of the writing of this thesis, publications related to this work are currently under review.
+
+The primary contributions of this project include: 
+
+\begin{itemize}
+    \item \textbf{Extension of Minimum Entropy Coupling:} MEC-B extends the classical MEC framework by incorporating rate limits, enabling a more controlled and flexible approach to coupling.
+    \item \textbf{Entropy-Bounded Information Maximization:} The chapter introduces and investigates the EBIM formulation for compression, which seeks to maximize the mutual information between the input and the compressed representation subject to an entropy constraint.
+    \item \textbf{Novel Search Algorithm and Theoretical Insights:}  A novel search algorithm is proposed for identifying deterministic mappings with guaranteed performance bounds in the context of EBIM. Additionally, the chapter characterizes the optimal solution in the vicinity of deterministic mappings, providing valuable theoretical insights into the problem structure.
+\end{itemize} 
+
+\section{Organization of the Thesis}
+
+This thesis is structured into five chapters, each addressing a specific aspect of the research conducted.
+
+Chapter~\ref{ch:fmri} focuses on fMRI data analysis and presents Shared Gaussian Process Factor Analysis (S-GPFA) as a novel probabilistic model for capturing shared temporal dynamics and individual variability in brain activity. The chapter provides a comprehensive overview of fMRI, highlighting the challenges associated with analyzing this complex data, and introduces S-GPFA as a solution that addresses these challenges. The chapter also includes experimental results demonstrating the effectiveness of S-GPFA in identifying group-specific dynamical characteristics and brain regions with meaningful functional variability.
+
+Chapter~\ref{ch:sgc} explores the problem of straggler mitigation in distributed training of machine learning models. The chapter begins by discussing the challenges posed by stragglers in distributed computing environments and introduces two innovative coding schemes, SR-SGC and M-SGC, that leverage coding across both the spatial and temporal dimensions to achieve straggler resilience. The chapter further presents experimental results showcasing the performance improvements achieved by these schemes on a large-scale AWS Lambda cluster.
+
+Chapter~\ref{ch:mecb} investigates the theoretical foundations of data coupling and compression through the lens of information theory. The chapter introduces Minimum Entropy Coupling with Bottleneck (MEC-B) as a framework for lossy data compression under logarithmic loss and explores its connection to the classical Minimum Entropy Coupling (MEC) framework. The chapter also introduces the Entropy-Bounded Information Maximization (EBIM) formulation for compression and proposes a novel search algorithm for identifying deterministic mappings with guaranteed performance bounds. 
+
+Chapter~\ref{ch:conclusion}, Conclusions, summarizes the key findings and contributions of the thesis and outlines potential avenues for future work. 
