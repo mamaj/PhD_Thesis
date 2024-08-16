@@ -8,7 +8,7 @@ Consider the following Markov Chain modeling a general lossy compression framewo
     X \xrightarrow{\enc_{T|X}} T \xrightarrow{\dec_{Y|T}} Y
 \end{equation}
 
-Here, the input $X$, with a marginal distribution $p_X$, is encoded by the probabilistic encoder \enc to generate the code $T$. Subsequently, the probabilistic decoder \dec reconstructs $Y$ from $T$. The objective is to identify the encoder and decoder that minimize the distortion between $X$ and $Y$, subject to a constraint on the expected code length $H(T)$.
+Here, the input $X$, with a marginal distribution $p_X$, is encoded by the probabilistic encoder \enc to generate the code $T$. Subsequently, the probabilistic decoder \dec constructs $Y$ from $T$. The objective is to identify the encoder and decoder that minimize the distortion between $X$ and $Y$, subject to a constraint on the expected code length $H(T)$.
 
 It is common to measure the sample-wise distortion via direct comparison of $(x, y)$ pairs through a distortion function $d(\cdot, \cdot)$, and consider the expectation $\ex \left[ d(X,Y)  \right]$ as a measure of average distortion. Instead, we propose using the logarithmic loss (log-loss) $H(X|Y)$, or equivalently $I(X;Y)$, as an alternative metric to enforce the distortion constraint.
 
@@ -82,7 +82,7 @@ Lemma~\ref{ch3:lemma:decomp} provides a decomposition for the mutual information
     \end{equation}
 \end{lemma}
 \begin{proof}
-By multiple applications of the chain rule for mutual information, i.e.  $I(A;B,C)=I(A;B)+I(A;C|B)$, we have:
+By multiple applications of the chain rule for mutual information, i.e.,  $I(A;B,C)=I(A;B)+I(A;C|B)$, we have:
 \begin{align}
     I(X;Y) &= I(X;Y,T) - I(X;T|Y) \\
     &= [I(X; T) + I(X; Y | T) ] - [ - I(T; Y) + I(T; X, Y) ] \\
@@ -193,7 +193,7 @@ In fact, \cite{kovavcevic2015entropy} shows that the minimum entropy coupling pr
 \begin{remark} The minimum entropy coupling problem in (\ref{ch3:eq:minent}) is NP-Hard \cite{kovavcevic2015entropy}.
 \end{remark}
 \begin{proof}
-To show an optimization problem is NP-Hard, we need to show the corresponding decision problem is NP-Hard.  Given an optimization problem, a decision version is whether or not any target value $t$ is achievable. Without the loss of generality, assume $|\mathcal{X}| > |\mathcal{Y}|$. We set $t=H(Y)$, i.e. to decide if there exists a function $f: \mathcal{X}\to\mathcal{Y}$ such that $Y=f(X)$. Let's call this problem \textit{Deterministic Matching}.
+To show an optimization problem is NP-Hard, we need to show the corresponding decision problem is NP-Hard.  Given an optimization problem, a decision version is whether or not any target value $t$ is achievable. Without the loss of generality, assume $|\mathcal{X}| > |\mathcal{Y}|$. We set $t=H(Y)$, i.e., to decide if there exists a function $f: \mathcal{X}\to\mathcal{Y}$ such that $Y=f(X)$. Let's call this problem \textit{Deterministic Matching}.
 
 Next, we show any instance of the $k$-Subset-Sum problem can be reduced to an instance of Deterministic Matching, by a polynomial-time procedure (denoted by the notation $<_p$). Consider a general instance of the $k$-Subset-Sum problem: Given set $\mathcal{S}$ of integers and target values $\{t_i|1\leq i\leq k\}$, decide if there exists a partition $\{\mathcal{S}_i|1\leq i\leq k \}$ of size $k$ on $\mathcal{S}$ such that $\sum \mathcal{S}_i = t_i$ for all $1\leq i\leq k$. 
 Now, set $p_X(i)=s_i/\sum(\mathcal{S}), \forall s_i \in \mathcal{S}$ and $p_Y(i)=t_i / \sum(t_j)$. Then, clearly solving Deterministic Matching for $p_X, p_Y$ will solve the original $k$-Subset-Sum problem. Therefore, $k$-Subset-Sum $<_p$ Deterministic Matching and hence, Deterministic Matching is NP-Hard. Consequently, Minimum Entropy Coupling is an NP-Hard optimization problem.
@@ -666,19 +666,24 @@ Section~\ref{ch3:sec:prposedsearch} introduced a greedy algorithm for identifyin
 \begin{theorem} \label{ch3:thm:neighbor}
 Let $\Pxt$ denoted by a $|\mathcal{X}| \times |\mathcal{T}|$ matrix, defines a deterministic mapping $T = g(X)$, with $ I(X;T)=H(T)=R_g $. We have $ \obj(p_X, R_g) = R_g $, and for small enough $ \epsilon > 0 $:
 \begin{enumerate}
-    \item $\obj(p_X, R_g + \epsilon)$ is attained by moving infinitesimal probability mass from the cell with the lowest normalized value, to a new column of $\Pxt$. Normalization is done by dividing each column by its sum.
+    % \item $\obj(p_X, R_g + \epsilon)$ is attained by moving infinitesimal probability mass from the cell with the lowest normalized value, to a new column of $\Pxt$. Normalization is done by dividing each column by its sum.
+    \item $\obj(p_X, R_g + \epsilon)$ is achieved as follows:\\
+    Normalize the columns by dividing each column by its sum. Then, select the cell with the smallest normalized value and move an infinitesimal probability mass from this cell to a new column of $p_{XT}$ in the same row.
+    
+    % \item $\obj(p_X, R_g - \epsilon)$ is achieved by transferring an infinitesimal probability mass from the smallest cell in the column with the lowest sum, to the column with the highest sum in $\Pxt$.
+    \item $\mathcal{I}_{EBIM}(p_X, R_g - \epsilon)$ is achieved as follows:\\
+    Identify the columns with the smallest and largest sums in $p_{XT}$. Select the cell with the smallest value in the column with the lowest sum. Transfer an infinitesimal probability mass from this cell to the column with the highest sum in the same row.
 
-    \item $\obj(p_X, R_g - \epsilon)$ is achieved by transferring an infinitesimal probability mass from the smallest cell in the column with the lowest sum, to the column with the highest sum in $\Pxt$.
 \end{enumerate}
 \end{theorem}
 
 \begin{example}    
-Figure \ref{ch3:fig:didh} depicts an example of optimal solutions in the neighborhood of a deterministic mapping.
+The following depicts an application of Theorem~\ref{ch3:thm:neighbor}:
 \begin{figure}[h] 
-\centering
-\includegraphics[width=0.35\linewidth]{figs/ch3/didh2.pdf}
-% \vspace{5pt}
-\caption{Optimal solutions in the neighborhood of a deterministic mapping.}\label{ch3:fig:didh} 
+    \centering
+    \vspace{-5pt}
+    \includegraphics[width=0.3\linewidth]{figs/ch3/didh2.pdf}
+    \caption{Optimal solutions in the neighbourhood of a deterministic mapping.}\label{ch3:fig:didh} 
 \end{figure}
 
 \FloatBarrier
@@ -827,7 +832,7 @@ Let's focus on the limit of (\ref{ch3:eq:dIdHlimit}) when $\dpp\to 0$: If there 
     \end{cases} \label{ch3:eq:dIdHfinal}
 \end{equation}
 
-For $ \dif{H_T}>0 $, we need to find a perturbation (i.e. coefficients $ \alpha_{x,t} $) that maximizes $ \dif{I_{XT}} / \dif{H_T} $. From (\ref{ch3:eq:dIdHfinal}), this means $\exists t\in\mathcal{T}$ with $\abar_{x,t}>0$ and $p_T(t)=0$.
+For $ \dif{H_T}>0 $, we need to find a perturbation (i.e., coefficients $ \alpha_{x,t} $) that maximizes $ \dif{I_{XT}} / \dif{H_T} $. From (\ref{ch3:eq:dIdHfinal}), this means $\exists t\in\mathcal{T}$ with $\abar_{x,t}>0$ and $p_T(t)=0$.
 \begin{align*}
     \abar 
     = \argmax_{\abar} \cfrac{\dif{I_{X,T}}}{\dif{H_T}}
@@ -868,7 +873,7 @@ In other words, first, normalize columns in $ \Pxt $ by their sum, then move an 
     \end{bmatrix}
 \end{align}
 
-On the other hand, for $ \dif{H_T}<0 $, we need to find a perturbation (i.e. coefficients $ \alpha_{x,t} $) that minimizes $ \dif{I_{XT}} / \dif{H_T} $. From (\ref{ch3:eq:dIdHfinal}), this means $\abar_{x,t} = 0$ for all $t\in\mathcal{T}$ that $p_T(t)=0$. Therefore, as in (\ref{ch3:eq:dIdHlimit}):
+On the other hand, for $ \dif{H_T}<0 $, we need to find a perturbation (i.e., coefficients $ \alpha_{x,t} $) that minimizes $ \dif{I_{XT}} / \dif{H_T} $. From (\ref{ch3:eq:dIdHfinal}), this means $\abar_{x,t} = 0$ for all $t\in\mathcal{T}$ that $p_T(t)=0$. Therefore, as in (\ref{ch3:eq:dIdHlimit}):
 
 \spaced{
 \begin{align*}
@@ -925,10 +930,9 @@ We will consider a natural extension to Markov Coding Games, where the link from
 
 
 \subsection{Backgrounds and Notations}
-\paragraph{Markov Decision Process}  MDPs are represented by the tuple notation $(\mathcal{S}, \mathcal{A}, \mathcal{R}, \mathcal{T})$, where $\mathcal{S}$ is the state space, $\mathcal{A}$ denoteds the action space, $\mathcal{R}: \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$ defines the reward function, and $\mathcal{T}: \mathcal{S} \times \mathcal{A} \rightarrow \mathcal{P}(\mathcal{S})$ represents the transition function. The way an agent interacts with an MDP is determined by its policy $\pi: \mathcal{S} \rightarrow \mathcal{P}(\mathcal{A})$, which assigns distributions over actions for each state. Our main focus is on episodic MDPs, which terminate after a limited sequence of transitions. The sequence of states and actions, called a trajectory, is recorded as $z = (s_0, a_0, \ldots, s_T)$. The notation $R(z) = \sum_t \gamma^t R(s_t, a_t)$ is used to represent the total rewards accrued throughout a sequence. The primary aim of an MDP is to devise a policy that maximizes the expected cumulative reward $\mathbb{E}[R(Z) | \pi]$.
+\paragraph{Markov Decision Process}  MDPs are represented by the tuple notation $(\mathcal{S}, \mathcal{A}, \mathcal{R}, \mathcal{T})$, where $\mathcal{S}$ is the state space, $\mathcal{A}$ denoted the action space, $\mathcal{R}: \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$ defines the reward function, and $\mathcal{T}: \mathcal{S} \times \mathcal{A} \rightarrow \mathcal{P}(\mathcal{S})$ represents the transition function. The way an agent interacts with an MDP is determined by its policy $\pi: \mathcal{S} \rightarrow \mathcal{P}(\mathcal{A})$, which assigns distributions over actions for each state. Our main focus is on episodic MDPs, which terminate after a limited sequence of transitions. The sequence of states and actions, called a trajectory, is recorded as $z = (s_0, a_0, \ldots, s_T)$. The total rewards accrued throughout a sequence is $R(z) = \sum_t \gamma^t R(s_t, a_t)$, where $0<\gamma<1$ is the reward discount factor. The primary aim of an MDP is to devise a policy that maximizes the expected cumulative reward $\mathbb{E}[R(Z) | \pi]$.
 
 \paragraph{Maximum Entropy Reinforcement Learning} a policy that exhibits a high degree of randomness is preferred in certain situations. Under these circumstances, the maximum-entropy RL objective
-
 \begin{align}
     \max_{\pi} \mathbb{E}_{\pi} \left[ \sum_{t} R(S_t, A_t) + \beta H(A_t | S_t) \right] \label{ch3:eq:maxentrl}
 \end{align}
@@ -974,7 +978,7 @@ If a suitable distance function exists, instead, the objective can also be adjus
 \subsection{Method Description}\label{ch3:sec:mgcmethod}
 
 \paragraph{Marginal Policy} 
-Before execution, we first derive a marginal policy $\pi$ for the MDP, based on the Maximum-Entropy objective outlined in Equation (\ref{ch3:eq:maxentrl}). The value of $\beta$ in the Maximum-Entropy objective needs to be determined in accordance with the message priority $\zeta$ of the MGC. Note that this marginal policy does not depend on the choice of a specific message. By introducing stochasticity into this policy, we can encode information about the message into the selection of actions at each step during runtime
+Following \cite{sokota2022communicating}, before execution, we first derive a marginal policy $\pi$ for the MDP, based on the Maximum-Entropy objective outlined in Equation (\ref{ch3:eq:maxentrl}). The value of $\beta$ in the Maximum-Entropy objective needs to be determined in accordance with the message priority $\zeta$ of the MGC. Note that this marginal policy does not depend on the choice of a specific message. By introducing stochasticity into this policy, we can encode information about the message into the selection of actions at each step during runtime
 
 \paragraph{Step 1 - Source: Message Compression}
 At the beginning of each round, given the updated message belief $p_M$, the source compresses the message to generate the signal $T$, adhering to the source-agent rate limit $R$, by solving \eqref{ch3:eq:obj}. The source then transmits the signal $T$ to the agent. Subsequently, after observing the action taken by the agent, the source updates the message belief for the next round. Algorithm \ref{ch3:alg:source} outlines the steps taken by the source.
@@ -1154,7 +1158,7 @@ Figure~\ref{ch3:fig:accvssteps} illustrates the evolution of message belief over
 
 \section{Summary and Concluding Remarks}
 
-We investigated a lossy compression framework under logarithmic loss, where the reconstruction distribution differs from the source distribution. This framework supports joint compression and retrieval applications such as super-resolution from compressed data, or more generally, cases where distributional shifts occur due to processing. We demonstrated that this framework effectively extends the classical minimum entropy coupling by incorporating a bottleneck, which regulates the degree of stochasticity or determinism in the coupling.
+We investigated a lossy compression framework under logarithmic loss, where the output distribution differs from the source distribution. This framework supports joint compression and retrieval applications such as super-resolution from compressed data, or more generally, cases where distributional shifts occur due to processing. We demonstrated that this framework effectively extends the classical minimum entropy coupling by incorporating a bottleneck, which regulates the degree of stochasticity or determinism in the coupling.
 
 We demonstrated that separately optimizing the encoder and decoder decomposes the Minimum Entropy Coupling with Bottleneck (MEC-B) into two distinct problems: Entropy-Bounded Information Maximization (EBIM) for the encoder, followed by Minimum Entropy Coupling (MEC) for the decoder. We conducted an extensive study of the EBIM problem, provided a functional mapping search algorithm with guaranteed performance, and characterized the optimal solution adjacent to functional mappings, offering valuable theoretical insights into the problem structure.
 

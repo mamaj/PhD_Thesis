@@ -3,12 +3,12 @@
 Machine learning (ML) has profoundly transformed the way we analyze data, make predictions, and solve complex problems across numerous fields. At its core, machine learning involves the development of algorithms that allow computers to learn from and make decisions based on data.
 The impact of machine learning is profound and far-reaching, affecting industries and sciences by providing innovative solutions to complex, data-driven problems. It has transformed sectors such as healthcare, finance, and telecommunications, where predictive analytics and automated decision-making processes significantly enhance efficiency and effectiveness. In the scientific domain, machine learning techniques have become indispensable tools in fields ranging from genomic sequencing to astrophysics, helping to unravel complex patterns and predict phenomena with unprecedented accuracy.
 
-This thesis explores three critical dimensions in machine learning: \textit{modeling}, \textit{training}, and \textit{theory}. Each dimension is represented by a specific project in brain imaging, distributed computing, and compression, addressing unique challenges and contributing to the overarching goal of advancing machine learning methodologies and applications.
+This thesis explores three critical dimensions in machine learning: \textit{modeling}, \textit{training}, and \textit{theory}. Each dimension is represented by a study in brain imaging, distributed computing, and compression, addressing unique challenges and contributing to the overarching goal of advancing machine learning methodologies and applications.
 
 Modeling refers to the process of providing simplifying assumptions on the data generation process, which leads to algorithms capable of identifying patterns in data and making predictions or decisions based on those patterns. Training involves optimizing these models using data, often requiring substantial computational resources and careful coordinating and aggregating, especially in distributed systems. Lastly, theoretical insights, particularly from information theory, are essential for understanding and improving machine learning systems, by quantifying the limits of data compression, storage, and communication.
 
 \section{Core Themes of the Thesis}
-This thesis investigates three essential aspects of machine learning: \textit{modeling}, \textit{training}, and \textit{theory}. Each theme is explored through dedicated projects that address specific challenges within these areas. 
+The following themes are examined through targeted studies that tackle distinct challenges within these areas.
 
 \subsection{Modeling}
 Classically, statistical modeling involves assuming a simplified generation process for the observed data with the goal of capturing specific properties of data. In modern deep learning, models are much more flexible, so modeling largely entails making architectural choices that inject specific inductive biases into the learning algorithm.
@@ -41,9 +41,7 @@ The MEC-B framework offers a unique perspective on compression and information r
 
 \section{Summary of Contributions}
 
-This thesis presents three distinct projects, each contributing to the advancement of machine learning methodologies and applications across different domains. 
-
-The first project, detailed in Chapter~\ref{ch:fmri}, introduces Shared Gaussian Process Factor Analysis (S-GPFA) as a novel probabilistic model for analyzing fMRI data. S-GPFA addresses the challenge of modeling individual variability while uncovering shared temporal dynamics and spatial organization of brain activity in multi-subject datasets. The results presented in Chapter~\ref{ch:fmri} have appeared in \cite{ebrahimi2023time}. The key contributions of this project include:
+The first study, detailed in Chapter~\ref{ch:fmri}, introduces Shared Gaussian Process Factor Analysis (S-GPFA) as a novel probabilistic model for analyzing fMRI data. S-GPFA addresses the challenge of modeling individual variability while uncovering shared temporal dynamics and spatial organization of brain activity in multi-subject datasets. The results presented in Chapter~\ref{ch:fmri} have appeared in \cite{ebrahimi2023time}. The key contributions of this study include:
 
 \begin{itemize}
     \item \textbf{Modeling Shared Temporal Dynamics:} S-GPFA incorporates Gaussian Process priors to model the temporal correlations within fMRI data, leading to more accurate and interpretable representations of brain activity compared to traditional static methods.
@@ -51,9 +49,9 @@ The first project, detailed in Chapter~\ref{ch:fmri}, introduces Shared Gaussian
     \item \textbf{Scientific Utility:}  The application of S-GPFA to the SPINS dataset demonstrates its ability to identify group-specific dynamical characteristics and brain regions with meaningful functional variability, offering valuable insights into socioemotional cognitive capacity and potential avenues for studying psychiatric disorders. 
 \end{itemize}
 
-The second project, presented in Chapter~\ref{ch:sgc}, focuses on mitigating the impact of stragglers in distributed training of machine learning models. The chapter introduces two novel coding schemes, Selective Reattempt Sequential Gradient Coding (SR-SGC) and Multiplexed Sequential Gradient Coding (M-SGC), that leverage coding across both the spatial and temporal dimensions to achieve straggler resilience with reduced computational load. The results presented in Chapter~\ref{ch:sgc} have been published in \cite{krishnan2023sequential}, where the author holds joint first authorship. Contributions primarily focused on the real-world evaluation and implementation of the schemes.
+The second study, presented in Chapter~\ref{ch:sgc}, focuses on mitigating the impact of stragglers in distributed training of machine learning models. The chapter introduces two novel coding schemes, Selective Reattempt Sequential Gradient Coding (SR-SGC) and Multiplexed Sequential Gradient Coding (M-SGC), that leverage coding across both the spatial and temporal dimensions to achieve straggler resilience with reduced computational load. The results presented in Chapter~\ref{ch:sgc} have been published in \cite{krishnan2023sequential}, where the author holds joint first authorship. Contributions primarily focused on the real-world evaluation and implementation of the schemes.
 
-The main contributions of this project are:
+The main contributions of this study are:
 
 \begin{itemize}
     \item \textbf{Exploiting Temporal Diversity:} SR-SGC and M-SGC effectively exploit the temporal diversity of straggler behavior, adapting to varying worker speeds and minimizing delays caused by stragglers.
@@ -61,14 +59,14 @@ The main contributions of this project are:
     \item \textbf{Real-world Performance and Insights:} Experiments on a large-scale AWS Lambda cluster demonstrate the effectiveness of the proposed schemes in reducing runtime and improving training performance in real-world conditions with naturally occurring stragglers.
 \end{itemize}
 
-The third project, explored in Chapter~\ref{ch:mecb}, investigates the theoretical foundations of data coupling and compression through the lens of information theory. The chapter introduces Minimum Entropy Coupling with Bottleneck (MEC-B) as a framework for lossy data compression under logarithmic loss. As of the writing of this thesis, publications related to this work are currently under review.
+The third study, explored in Chapter~\ref{ch:mecb}, investigates the theoretical foundations of data coupling and compression through the lens of information theory. The chapter introduces Minimum Entropy Coupling with Bottleneck (MEC-B) as a framework for lossy data compression under logarithmic loss. As of the writing of this thesis, publications related to this work are currently under review.
 
-The primary contributions of this project include: 
+The primary contributions of this study include: 
 
 \begin{itemize}
     \item \textbf{Extension of Minimum Entropy Coupling:} MEC-B extends the classical MEC framework by incorporating rate limits, enabling a more controlled and flexible approach to coupling.
     \item \textbf{Entropy-Bounded Information Maximization:} The chapter introduces and investigates the EBIM formulation for compression, which seeks to maximize the mutual information between the input and the compressed representation subject to an entropy constraint.
-    \item \textbf{Novel Search Algorithm and Theoretical Insights:}  A novel search algorithm is proposed for identifying deterministic mappings with guaranteed performance bounds in the context of EBIM. Additionally, the chapter characterizes the optimal solution in the vicinity of deterministic mappings, providing valuable theoretical insights into the problem structure.
+    \item \textbf{Novel Search Algorithm and Theoretical Insights:}  A novel search algorithm is proposed for identifying deterministic mappings with guaranteed performance bounds in the context of EBIM. Additionally, the chapter characterizes the optimal solution in the neighbourhood of deterministic mappings, providing valuable theoretical insights into the problem structure.
 \end{itemize} 
 
 \section{Organization of the Thesis}
